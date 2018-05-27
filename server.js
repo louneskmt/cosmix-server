@@ -44,6 +44,6 @@ server = http.createServer(function (req, res) {
 });
 
 
-server.listen(80, "0.0.0.0", function(){
+server.listen(8080, "0.0.0.0", function(){
     console.log("The server is serving. Waiter is waiting for a request.");
 });
