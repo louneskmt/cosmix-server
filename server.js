@@ -51,15 +51,8 @@ server = http.createServer(function (req, res) {
     
 });
 
-
-<<<<<<< HEAD
-server.listen(8080, "0.0.0.0", function(){
-    console.log("The server is serving. Waiter is waiting for a request.");
-});
-=======
 // Démarrage du Serveur
 var port = 8080, adresse = "0.0.0.0"; // L'adresse 0.0.0.0 écoute toutes les IPs (locales et externes)
 server.listen(port, adresse, function(){
     console.log(ansi.green("The server is serving. Waiter is waiting for a request."));
 });
->>>>>>> 813990dd67bcdf0758651d8b3a34a34a98dadc7d
