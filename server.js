@@ -1,26 +1,28 @@
-    
+const ansi = require("ansi-colors");
 const http = require('http');
 const url = require("url");
 const fs = require("fs");
 
 server = http.createServer(function (req, res) {
-    var page = req.url;
+    var page = req.url; // La page correspond à l'URL demandée (sans le nom de l'hôte)
     
-    if(page==="/") page = "/index.html";
-    console.log(`A user is connected at ${page}`);
+    if(page==="/") page = "/index.html"; // Si on se connecte à la racine, alors remplacer la page par /index.html
+    console.log(ansi.yellow(`A user is connected at ${page}`));
     
-    var filePath = __dirname+"/pages"+page;
+    var filePath = __dirname+"/pages"+page; // Trouver le fichier correspond à la page demandée
     
-    var fileExists = fs.existsSync(filePath);
+    var fileExists = fs.existsSync(filePath); // Verifier si le fichier existe
     
-    if(!fileExists){
-        console.log("404 at "+ page);
+    if(!fileExists){ // Si le fichier n'existe pas
+        console.log(ansi.red("404 at "+ page));
         
-        let filePath = __dirname+"/pages/404.html";
+        // Redirection 404
+        // let filePath = __dirname+"/pages/404.html";
         
         fs.readFile(filePath, function (err, resp) {
+            // Erreur 404
             res.writeHead(404, {"Content-Type": "text/html"});
-            res.write(resp);
+            res.write("Erreur 404");
             res.end();
         });
         
@@ -29,21 +31,35 @@ server = http.createServer(function (req, res) {
     
     var filePath = __dirname+"/pages"+page;
     
-    fs.readFile(filePath, function (err, resp) {
-        if(resp===null){
-            res.writeHead(404);
+    try {
+        fs.readFile(filePath, function (err, resp) {
+            if(resp===null){
+                res.writeHead(404);
+                res.end();
+                console.log(`Error at ${page} <br/>${err}`);
+            }
+            
+            res.writeHead(200, {"Content-Type": "text/html"});
+            res.write(resp);
             res.end();
-            console.log(`Error at ${page} <br/>${err}`);
-        }
-        
-        res.writeHead(200, {"Content-Type": "text/html"});
-        res.write(resp);
-        res.end();
-    })
+        });
+    } catch (error) {
+        console.error(ansi.bgRed("CATCHED ERROR !!!")+" fs.readFile(filePath...)");
+        console.error(ansi.red.strikethrough(error));
+        console.log("");
+    }
     
 });
 
 
+<<<<<<< HEAD
 server.listen(8080, "0.0.0.0", function(){
     console.log("The server is serving. Waiter is waiting for a request.");
 });
+=======
+// Démarrage du Serveur
+var port = 8080, adresse = "0.0.0.0"; // L'adresse 0.0.0.0 écoute toutes les IPs (locales et externes)
+server.listen(port, adresse, function(){
+    console.log(ansi.green("The server is serving. Waiter is waiting for a request."));
+});
+>>>>>>> 813990dd67bcdf0758651d8b3a34a34a98dadc7d
