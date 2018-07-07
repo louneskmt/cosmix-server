@@ -20,6 +20,7 @@
   "homepage": "https://github.com/lounes-kmt/cosmix-server#readme",
   "dependencies": {
     "ansi-colors": "^2.0.2",
+    "http-server": "^0.11.1",
     "socket.io": "^2.1.1"
   }
 }
