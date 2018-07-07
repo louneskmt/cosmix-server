@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/lounes-kmt/cosmix-server#readme",
   "dependencies": {
+    "ansi-colors": "^2.0.2",
     "socket.io": "^2.1.1"
   }
 }
