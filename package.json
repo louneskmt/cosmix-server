@@ -21,6 +21,7 @@
   "dependencies": {
     "ansi-colors": "^2.0.2",
     "http-server": "^0.11.1",
+    "npm": "^6.1.0",
     "socket.io": "^2.1.1"
   }
 }
