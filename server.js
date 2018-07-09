@@ -1,7 +1,7 @@
 const server = require('http').createServer();
 
 // Chargement de socket.io
-var io = require('socket.io')(server);
+var io = require('socket.io').listen(server);
 console.log('Serveur créé !');
 
 // Quand un client se connecte, on le note dans la console
