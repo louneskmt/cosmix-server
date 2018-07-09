@@ -56,3 +56,14 @@ var port = 8080, adresse = "0.0.0.0"; // L'adresse 0.0.0.0 écoute toutes les IP
 server.listen(port, adresse, function(){
     console.log(ansi.green("The server is serving. Waiter is waiting for a request."));
 });
+
+var io = require('socket.io').listen(server);
+console.log('Serveur créé !');
+
+server.listen(8080);
+
+// Quand un client se connecte, on le note dans la console
+io.sockets.on('connection', function (socket) {
+    console.log('Un client est connecté !');
+});
+
