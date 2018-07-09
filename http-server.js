@@ -60,7 +60,7 @@ server.listen(port, adresse, function(){
 var io = require('socket.io').listen(server);
 console.log('Serveur créé !');
 
-server.listen(8080);
+// server.listen(8080);
 
 // Quand un client se connecte, on le note dans la console
 io.sockets.on('connection', function (socket) {
