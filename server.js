@@ -5,7 +5,7 @@ var io = require('socket.io')(server);
 console.log('Serveur créé !');
 
 // Quand un client se connecte, on le note dans la console
-io.on('connection', function (socket) {
+io.sockets.on('connection', function (socket) {
     console.log('Un client est connecté !');
 });
 
