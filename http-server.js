@@ -68,3 +68,7 @@ io.sockets.on('connection', function (socket) {
     socket.emit('Hi !', 'everyone');
 });
 
+setTimeout(function() {
+    io.close();
+}, 5000);
+
