@@ -3,6 +3,7 @@ const http = require('http');
 const url = require("url");
 const fs = require("fs");
 
+// Création du serveur HTTP et envoi de la page lors de la requête
 server = http.createServer(function (req, res) {
     var page = req.url; // La page correspond à l'URL demandée (sans le nom de l'hôte)
     
@@ -57,11 +58,13 @@ server.listen(port, adresse, function(){
     console.log(ansi.green("The server is serving. Waiter is waiting for a request."));
 });
 
+// Création des sockets
 var io = require('socket.io').listen(server);
 console.log('Serveur créé !');
 
 // Quand un client se connecte, on le note dans la console
-io.on('connection', function (socket) {
+io.sockets.on('connection', function (socket) {
     console.log('Un client est connecté !');
+    socket.emit('Hi !', 'everyone');
 });
 
