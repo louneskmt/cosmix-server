@@ -1,7 +1,18 @@
+/*
+Fichier "arduino.js"
+Gestion de la récupération des données sur le port Serial et écriture dans un fichier
+
+Dernière modification par Lounès le 11/07
+*/
+
+// Message de lancement
 console.log("Lancé ! Récupération des données en cours...");
 
+// Module de création et d'écriture dans un fichier et gestion de la date
 var fs = require("fs");
-fs.writeFileSync("./lastest_experiment.csmx", "Mesure\n", "UTF-8");
+var now = new Date();
+var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-"+ now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + ":" + now.getMinutes() +'.csmx';
+fs.writeFileSync(file_name, "Mesure\n", "UTF-8");
 
 var SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
