@@ -12,7 +12,15 @@ console.log("Lancé ! Récupération des données en cours...");
 var fs = require("fs");
 var now = new Date();
 var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + "-" + now.getMinutes() + ".csmx";
-fs.writeFileSync(file_name, "Mesure\n", "UTF-8");
+console.log(file_name);
+fs.writeFile(file_name, "Mesure\n", function(error) {
+    if(err) {
+        console.log("error is: " + err);
+    }
+    else {
+        console.log("no error found");
+    }
+});
 
 var SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
