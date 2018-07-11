@@ -11,7 +11,7 @@ console.log("Lancé ! Récupération des données en cours...");
 // Module de création et d'écriture dans un fichier et gestion de la date
 var fs = require("fs");
 var now = new Date();
-var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-"+ now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + "-" + now.getMinutes() +'.csmx';
+var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + "-" + now.getMinutes() + ".csmx";
 fs.writeFileSync(file_name, "Mesure\n", "UTF-8");
 
 var SerialPort = require('serialport');
@@ -26,8 +26,8 @@ port.on('open', function() {
 
     parser.on('data', function(data) {
         console.log(data);
-        fs.appendFileSync('file_name', data);
-        fs.appendFileSync('file_name', '\n');
+        fs.appendFileSync(file_name, data);
+        fs.appendFileSync(file_name, '\n');
     });
 });
 
