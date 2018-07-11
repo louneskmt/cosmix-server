@@ -1,6 +1,6 @@
 {
   "name": "cosmix-server",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Dedicated server for the Cosmix desktop app (GitHub repository : https://github.com/lounes-kmt/cosmix-desktop).",
   "main": "server.js",
   "scripts": {
