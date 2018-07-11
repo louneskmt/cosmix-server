@@ -13,7 +13,7 @@ var fs = require("fs");
 var now = new Date();
 var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + "-" + now.getMinutes() + ".csmx";
 console.log("Fichier de mesure enregistré sous : " + file_name);
-fs.writeFile(file_name, "Mesure\n", 'UTF-8');
+fs.writeFileSync(file_name, "Mesure\n", 'UTF-8');
 
 var SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
