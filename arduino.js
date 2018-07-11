@@ -7,10 +7,10 @@ var port = new SerialPort('/dev/ttyACM0', {
 });
 const parser = port.pipe(new Readline({ delimiter: '\r\n' }));
 
-port.on('open', function() {
+parser.on('open', function() {
     console.log('Serial Port Opened');
 
-    port.on('data', function(data) {
+    parser.on('data', function(data) {
         console.log(data);
     });
 });
