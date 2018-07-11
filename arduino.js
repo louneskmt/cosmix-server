@@ -1,7 +1,7 @@
 console.log("Lancé ! Récupération des données en cours...");
 
 var fs = require("fs");
-fs.writeFileSync("./lastest_experiment.csmx", "Mesure", "UTF-8");
+fs.writeFileSync("./lastest_experiment.csmx", "Mesure\n", "UTF-8");
 
 var SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
