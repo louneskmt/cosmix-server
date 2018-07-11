@@ -14,8 +14,8 @@ var now = new Date();
 var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + "-" + now.getMinutes() + ".csmx";
 console.log(file_name);
 fs.writeFile(file_name, "Mesure\n", function(error) {
-    if(err) {
-        console.log("error is: " + err);
+    if(error) {
+        console.log("error is: " + error);
     }
     else {
         console.log("no error found");
