@@ -12,7 +12,7 @@ console.log("Lancé ! Récupération des données en cours...");
 var fs = require("fs");
 var now = new Date();
 // var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + "-" + now.getMinutes() + ".csmx";
-var file_name = "./lastest-experiment.csmx";
+var file_name = "./lastest-experiment" + ".csmx";
 console.log(file_name);
 fs.writeFile(file_name, "Mesure\n", function(error) {
     if(error) {
