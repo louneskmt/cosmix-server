@@ -16,6 +16,7 @@ port.on('open', function() {
     parser.on('data', function(data) {
         console.log(data);
         fs.appendFileSync('./lastest_experiment.csmx', data);
+        fs.appendFileSync('./lastest_experiment.csmx', '\n');
     });
 });
 
