@@ -1,10 +1,11 @@
 console.log("Lancé ! Récupération des données en cours...");
 
 var SerialPort = require('serialport');
+const Readline = require('@serialport/parser-readline');
 var port = new SerialPort('/dev/ttyACM0', {
-    baudRate: 9600,
-    parser: SerialPort.parser.readline("\n")
+    baudRate: 9600
 });
+const parser = port.pipe(new Readline({ delimiter: '\r\n' }));
 
 port.on('open', function() {
     console.log('Serial Port Opened');
