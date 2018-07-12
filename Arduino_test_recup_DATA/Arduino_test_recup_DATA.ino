@@ -9,7 +9,9 @@ int count2 = 0;
 int coinc = 0;
 int temps = 0;
 int intervalle = 0;
-int message = 0;
+int mem = 0;
+char message[100] = "";
+int i = 0;
 
 void setup() 
 {
@@ -38,11 +40,15 @@ void loop() {
       minute = 0;
       heure++;
     }    
+    temps = millis();
   }
 
   while (Serial.available())  {
-    message = Serial.read()-'0';  // on soustrait le caractère 0, qui vaut 48 en ASCII
-    Serial.println(message);
+    mem = Serial.read()-'0';  // on soustrait le caractère 0, qui vaut 48 en ASCII
+    Serial.println(mem);
+    message[i] = mem;
+    i++;
   }
+  i = 0;
 }
 
