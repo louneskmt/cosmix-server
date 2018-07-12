@@ -31,7 +31,14 @@ port.on('open', function() {
     parser.on('data', function(data) {
         console.log(data);
         fs.appendFileSync(file_name, data); // Ajout de la ligne de mesure récupérée à la fin du fichier
-        fs.appendFileSync(file_name, '\n');  
+        fs.appendFileSync(file_name, '\n');
+    });
+
+    port.write(Buffer.from('GO', 'utf-8'), function(err) {
+        if (err) {
+          return console.log('Error on write: ', err.message);
+        }
+        console.log('message written');
     });
 });
 
