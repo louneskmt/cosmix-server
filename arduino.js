@@ -34,12 +34,15 @@ port.on('open', function() {
         fs.appendFileSync(file_name, '\n');
     });
 
-    port.write(Buffer.from('GO', 'utf-8'), function(err) {
-        if (err) {
-          return console.log('Error on write: ', err.message);
-        }
-        console.log('message written');
-    });
+    setInterval(function() {
+        port.write(Buffer.from('GO', 'utf-8'), function(err) {
+            if (err) {
+              return console.log('Error on write: ', err.message);
+            }
+            console.log('message written');
+        });
+    }, 2500);
+    
 });
 
 // Gestion des erreurs
