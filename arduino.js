@@ -15,6 +15,8 @@ var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-" + no
 console.log("Fichier de mesure enregistré sous : " + file_name);
 fs.writeFileSync(file_name, "Mesure\n", 'UTF-8'); 
 
+var toBinary = require('binstring');
+
 // Initialisation du module de récupération des données sur le port Serial
 var SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
@@ -35,14 +37,13 @@ port.on('open', function() {
     });
 
     setInterval(function() {
-        port.write(Buffer.from('GO', 'utf-8'), function(err) {
+        port.write(toBinary('GO', { in:'binary' }), function(err) {
             if (err) {
               return console.log('Error on write: ', err.message);
             }
             console.log('message written');
         });
     }, 2500);
-    
 });
 
 // Gestion des erreurs
