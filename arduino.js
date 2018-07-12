@@ -37,7 +37,7 @@ port.on('open', function() {
     });
 
     setInterval(function() {
-        port.write(toBinary('GO', { out:'binary' }), function(err) {
+        port.write(toBinary('0100011101001111', { in:'binary'}), function(err) {
             if (err) {
               return console.log('Error on write: ', err.message);
             }
