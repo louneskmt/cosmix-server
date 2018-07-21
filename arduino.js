@@ -38,22 +38,30 @@ port.on('open', function() {
     }); 
 
     setInterval(function() {
+        /*
         port.write(toBinary('00001001111', { in:'binary'}), function(err) {
             if (err) {
               return console.log('Error on write: ', err.message);
             }
             console.log('message written');
-        });
-    }, 2500);
+        }); */
+        startConfig(600, 500, 400, 4180712152735, 4180712152740, 4180712152745);
+    }, 5000);
 });
 
 // Gestion des erreurs
 port.on('error', function(err) {
     console.log('Error: ', err.message);
 });
-/*
+
 function startConfig(GPS, bar, therm, clock, startTime, endTime) {
+    var message = GPS.toString(2) + bar.toString(2) + therm.toString(2) + clock.toString(2) + startTime.toString(2) + endTime.toString(2);
     
-    var message = GPS + bar + therm + clock + startTime + endTime;
-    port.write()
-} */
+    port.write(toBinary(message, {in:'binary'}), function(err) {
+        if (err) {
+          return console.log('Error on write config message: ', err.message);
+        }
+        console.log('config message written');
+    });
+}
+

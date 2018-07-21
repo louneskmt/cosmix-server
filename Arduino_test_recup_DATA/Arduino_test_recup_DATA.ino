@@ -46,7 +46,8 @@ void loop() {
   */
   while (Serial.available())  {
     mem = Serial.read()-'0';  // on soustrait le caractère 0, qui vaut 48 en ASCII
-    Serial.println(mem);
+    Serial.print(mem);
   }
+  Serial.println();
 }
 
