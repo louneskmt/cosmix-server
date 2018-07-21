@@ -41,7 +41,10 @@ void loop() {
       minute = 0;
       heure++;
     }    
-    temps = millis();
+    temps = m  while (Serial.available())  {
+    mem = Serial.read()-'0';  // on soustrait le caractère 0, qui vaut 48 en ASCII
+    Serial.print(mem);
+  }illis();
   }
   */
   while (Serial.available())  {
