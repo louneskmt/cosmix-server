@@ -38,16 +38,13 @@ port.on('open', function() {
     }); */
 
     setInterval(function() {
-        port.write(toBinary('0100011101001111', { in:'binary'}), function(err) {
+        port.write(toBinary('000001001111', { in:'binary'}), function(err) {
             if (err) {
               return console.log('Error on write: ', err.message);
             }
             console.log('message written');
         });
     }, 2500);
-
-    startConfig();
-    
 });
 
 // Gestion des erreurs
