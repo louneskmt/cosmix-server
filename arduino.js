@@ -8,8 +8,6 @@ Dernière modification par Lounès le 11/07
 // Message de lancement
 console.log("Lancé ! Récupération des données en cours...");
 
-var 
-
 // Module de création et d'écriture dans un fichier et gestion de la date
 var fs = require("fs");
 var now = new Date();
@@ -37,22 +35,25 @@ port.on('open', function() {
         console.log(data);
         fs.appendFileSync(file_name, data); // Ajout de la ligne de mesure récupérée à la fin du fichier
         fs.appendFileSync(file_name, '\n');
-    });
+    }); */
 
     setInterval(function() {
-        port.write(toBinary('0100011101001111', { in:'binary'}), function(err) {
+        port.write(toBinary('000001001111', { in:'binary'}), function(err) {
             if (err) {
               return console.log('Error on write: ', err.message);
             }
             console.log('message written');
         });
     }, 2500);
-    */
-
-    
 });
 
 // Gestion des erreurs
 port.on('error', function(err) {
     console.log('Error: ', err.message);
 });
+/*
+function startConfig(GPS, bar, therm, clock, startTime, endTime) {
+    
+    var message = GPS + bar + therm + clock + startTime + endTime;
+    port.write()
+} */
