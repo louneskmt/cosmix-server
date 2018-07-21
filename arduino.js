@@ -8,6 +8,8 @@ Dernière modification par Lounès le 11/07
 // Message de lancement
 console.log("Lancé ! Récupération des données en cours...");
 
+var 
+
 // Module de création et d'écriture dans un fichier et gestion de la date
 var fs = require("fs");
 var now = new Date();
@@ -29,6 +31,7 @@ const parser = port.pipe(new Readline({ delimiter: '\r\n' })); // Code afin d'ob
 port.on('open', function() {
     console.log('Serial Port Opened'); // Information console de l'ouverture du port
 
+    /*
     // Récupération des données disponibles et écriture à la fin du fichier
     parser.on('data', function(data) {
         console.log(data);
@@ -44,6 +47,9 @@ port.on('open', function() {
             console.log('message written');
         });
     }, 2500);
+    */
+
+    
 });
 
 // Gestion des erreurs
