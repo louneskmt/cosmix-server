@@ -21,6 +21,7 @@ void setup()
 }
 
 void loop() {
+  /*
   intervalle = millis() - temps;
   
   if(intervalle >= 5000) {
@@ -42,7 +43,7 @@ void loop() {
     }    
     temps = millis();
   }
-
+  */
   while (Serial.available())  {
     mem = Serial.read()-'0';  // on soustrait le caractère 0, qui vaut 48 en ASCII
     Serial.println(mem);
