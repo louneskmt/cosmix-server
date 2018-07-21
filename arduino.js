@@ -61,7 +61,7 @@ function startConfig(GPS, bar, therm, clock, startTime, endTime) {
         if (err) {
           return console.log('Error on write config message: ', err.message);
         }
-        console.log('config message written');
+        console.log('config message written: ' + message);
     });
 }
 
