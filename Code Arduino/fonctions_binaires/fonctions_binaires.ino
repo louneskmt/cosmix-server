@@ -1,11 +1,36 @@
-char getNthByte(int binary, int n){
+long configBinary = 0b111100001111000000001111;
+int config_START = 0b00001111;
+int configpad_GPS = 1;
+
+void setup(){
+  Serial.begin(9600);
+  
+}
+
+void loop(){
+ // Serial.println((uint8_t)getNthByte(configBinary, 0));
+
+  if(getNthByte(configBinary, 0)==15){
+
+     // GPS : 2 bytes
+     int GPS = getNthByte(configBinary, configpad_GPS)|(getNthByte(configBinary, configpad_GPS+1)<<8); // Concatenate binary values
+     Serial.print("GPS: ");
+     Serial.println((uint8_t)GPS);
+  }
+}
+
+
+
+int getNthByte(int binary, int n){
   // Retourne le N-ième octet d'un nombre entier binaire
   // Return N-th byte of a binary integer
 
   // 0 --> First byte
   // 1 --> Second byte
-  return (unsigned char)(binary>>n*8);
+  return (int)((binary>>n*8)&0xFF);
 }
+
+
 
 char writeIntToSerial(int message){
   // En travaillant en binaire, il faut écrire dans la console octet par octet
