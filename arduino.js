@@ -45,7 +45,7 @@ port.on('open', function() {
             }
             console.log('message written');
         }); */
-        startConfig(600, 500, 400, 4180712152735, 4180712152740, 4180712152745);
+        startConfig(600, 500, 400, 4180712152735, 600, 600);
     }, 5000);
 });
 
