@@ -29,15 +29,20 @@ const parser = port.pipe(new Readline({ delimiter: '\r\n' })); // Code afin d'ob
 port.on('open', function() {
     console.log('Serial Port Opened'); // Information console de l'ouverture du port
 
-    // Récupération des données disponibles et écriture à la fin du fichier
-    parser.on('data', function(data) {
-        console.log(data);
-        /*
-        fs.appendFileSync(file_name, data); // Ajout de la ligne de mesure récupérée à la fin du fichier
-        fs.appendFileSync(file_name, '\n'); */
-    }); 
+    setTimeout(function() {
+        // Récupération des données disponibles et écriture à la fin du fichier de mesure
+        parser.on('data', function(data) {
+            console.log(data);
 
-    startConfig(600, 500, 400, 4180712152735, 600, 600);
+            /* Décommenter après avoir fini les tests
+            fs.appendFileSync(file_name, data); // Ajout de la ligne de mesure récupérée à la fin du fichier
+            fs.appendFileSync(file_name, '\n'); // Retour à la ligne
+            */
+        }); 
+
+        startConfig(600, 500, 400, 4180712152735, 600, 600);
+    }, 5000);
+
 });
 
 // Gestion des erreurs
