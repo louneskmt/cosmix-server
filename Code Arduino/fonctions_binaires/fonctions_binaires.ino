@@ -19,8 +19,6 @@ void loop(){
   }
 }
 
-
-
 int getNthByte(int binary, int n){
   // Retourne le N-ième octet d'un nombre entier binaire
   // Return N-th byte of a binary integer
