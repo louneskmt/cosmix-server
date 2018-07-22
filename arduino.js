@@ -15,7 +15,7 @@ var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-" + no
 console.log("Fichier de mesure enregistré sous : " + file_name);
 fs.writeFileSync(file_name, "Mesure\n", 'UTF-8'); 
 
-var toBinary = require('binstring');
+var binstring = require('binstring');
 
 // Initialisation du module de récupération des données sur le port Serial
 var SerialPort = require('serialport');
@@ -39,7 +39,7 @@ port.on('open', function() {
 
     setInterval(function() {
         /*
-        port.write(toBinary('00001001111', { in:'binary'}), function(err) {
+        port.write(binstring('00001001111', { in:'binary'}), function(err) {
             if (err) {
               return console.log('Error on write: ', err.message);
             }
@@ -54,14 +54,39 @@ port.on('error', function(err) {
     console.log('Error: ', err.message);
 });
 
-function startConfig(GPS, bar, therm, clock, startTime, endTime) {
-    var message = GPS.toString(2) + bar.toString(2) + therm.toString(2) + clock.toString(2) + startTime.toString(2) + endTime.toString(2);
-    
-    port.write(toBinary(message, {in:'binary'}), function(err) {
+function startConfig(GPS, bar, therm, clock, start, end) {
+    var message = toBinary(GPS, 'GPS') + toBinary(bar, 'bar') + toBinary(therm, 'therm') + toBinary(clock, 'clock') + toBinary(start, 'start') + toBinary(end, 'end');
+
+    port.write(binstring(message, {in:'binary'}), function(err) {
         if (err) {
           return console.log('Error on write config message: ', err.message);
         }
-        console.log('config message written: ' + message);
+        console.log('config message written: ' + message + '\n');
     });
 }
 
+function toBinary(data, type) {
+    var taille = 0;
+    
+    data = data.toString(2);
+
+    switch(type) {
+        case 'GPS':
+        case 'bar':
+        case 'therm':
+        case 'start':
+        case 'end':
+            taille = 16;
+            break;
+        case 'clock':
+            taille = 48;
+    }
+
+    if(data.lenght() < taille) {
+        while(data.lenght() < taille) {
+            data = '0' + data;
+        }
+    }
+
+    return data;
+}
