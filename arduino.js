@@ -13,7 +13,11 @@ var fs = require("fs");
 var now = new Date();
 var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + ":" + now.getMinutes() + ".csmx";
 console.log("Fichier de mesure enregistré sous : " + file_name);
-fs.writeFileSync(file_name, "Mesure\n", 'UTF-8'); 
+try{
+    fs.writeFileSync(file_name, "Mesure\n", 'UTF-8'); 
+}catch(error){
+    console.log("Err 404 : "+file_name);
+}
 
 var binstring = require('binstring');
 

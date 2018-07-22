@@ -1,4 +1,4 @@
-long double configBinary = 0b000000011001000000000001111101000000001001011000;
+long double configBinary = 0b0000011001000000000001111101000000001001011000;
 int config_START = 0b00001111;
 int configpad_GPS = 1;
 
@@ -18,7 +18,9 @@ void setup(){
 
 void loop(){
 
- 
+ if(Serial.available()){
+  Serial.println(Serial.read());
+ }
 }
 
 int getNthByte(int binary, int n){
