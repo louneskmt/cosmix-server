@@ -37,16 +37,7 @@ port.on('open', function() {
         fs.appendFileSync(file_name, '\n'); */
     }); 
 
-    setInterval(function() {
-        /*
-        port.write(binstring('00001001111', { in:'binary'}), function(err) {
-            if (err) {
-              return console.log('Error on write: ', err.message);
-            }
-            console.log('message written');
-        }); */
-        startConfig(600, 500, 400, 4180712152735, 600, 600);
-    }, 5000);
+    startConfig(600, 500, 400, 4180712152735, 600, 600);
 });
 
 // Gestion des erreurs
