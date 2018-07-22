@@ -51,7 +51,8 @@ port.on('error', function(err) {
 });
 
 function startConfig(GPS, bar, therm, clock, start, end) {
-    var message = toBinary(GPS, 'GPS') + toBinary(bar, 'bar') + toBinary(therm, 'therm') + toBinary(clock, 'clock') + toBinary(start, 'start') + toBinary(end, 'end');
+    //var message = toBinary(GPS, 'GPS') + toBinary(bar, 'bar') + toBinary(therm, 'therm') + toBinary(clock, 'clock') + toBinary(start, 'start') + toBinary(end, 'end');
+    var message = toBinary(end, 'end') + toBinary(start, 'start') + toBinary(clock, 'clock') + toBinary(therm, 'therm') + toBinary(bar, 'bar') + toBinary(GPS, 'GPS');
 
     port.write(binstring(message, {in:'binary'}), function(err) {
         if (err) {

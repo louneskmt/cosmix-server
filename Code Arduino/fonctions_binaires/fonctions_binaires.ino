@@ -1,22 +1,24 @@
-long configBinary = 0b111100001111000000001111;
+long double configBinary = 0b000000011001000000000001111101000000001001011000;
 int config_START = 0b00001111;
 int configpad_GPS = 1;
 
 void setup(){
   Serial.begin(9600);
-  
-}
 
-void loop(){
- // Serial.println((uint8_t)getNthByte(configBinary, 0));
-
-  if(getNthByte(configBinary, 0)==15){
+  //if(getNthByte(configBinary, 0)==15){
+  if(true){
 
      // GPS : 2 bytes
+     Serial.println(sizeof(long double));
      int GPS = getNthByte(configBinary, configpad_GPS)|(getNthByte(configBinary, configpad_GPS+1)<<8); // Concatenate binary values
      Serial.print("GPS: ");
      Serial.println((uint8_t)GPS);
   }
+}
+
+void loop(){
+
+ 
 }
 
 int getNthByte(int binary, int n){
