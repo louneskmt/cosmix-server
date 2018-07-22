@@ -82,10 +82,9 @@ function toBinary(data, type) {
             taille = 48;
     }
 
-    if(data.length < taille) { // Ajout des 0 pour combler le vide
-        while(data.lenght() < taille) {
-            data = '0' + data;
-        }
+    // Ajout des 0 pour combler le vide
+    while(data.length < taille) {
+        data = '0' + data;
     }
 
     return data;
