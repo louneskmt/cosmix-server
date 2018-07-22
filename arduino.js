@@ -82,7 +82,7 @@ function toBinary(data, type) {
             taille = 48;
     }
 
-    if(data.lenght() < taille) {
+    if(data.length < taille) {
         while(data.lenght() < taille) {
             data = '0' + data;
         }
