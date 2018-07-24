@@ -44,8 +44,7 @@ void loop(){
    
    
   
-  int data = Serial.parseInt(); // A remplacer par Serial.read();
-  Serial.println(data);
+  int data = Serial.read(); // A remplacer par Serial.read();
 
   if(configuring){
     recordConfig(data);
@@ -53,7 +52,7 @@ void loop(){
 
   if(data==configStartCode){
    configuring = true;   
-   Serial.println("Configuring");
+  // Serial.println("Configuring");
   }
   
  }
@@ -63,9 +62,9 @@ bool recordConfig(int data){
   configArray[configCursor] = data;
 
   configCursor++;
-  Serial.println(data, BIN);
+  //Serial.println(data, BIN);
     
-  if(configCursor>=6){
+  if(configCursor>=10){
      configuring = false;
      configure();
   }
@@ -110,7 +109,7 @@ int getNthByte(long binary, int n){
 }
 
 int concatenateBinary(int b1,int b2){
-  return (b2|(b1<<8));
+  return (b1|(b2<<8));
 }
 
 

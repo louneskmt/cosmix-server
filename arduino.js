@@ -76,8 +76,6 @@ function startConfig(GPS, bar, therm, clock, start, end) {
     });
     var buffer = Buffer.from(bufferArray);
 
-    console.log(buffer);
-
     port.write(buffer, function(err) {
         if (err) {
           return console.log('Error on write config message: ', err.message);
