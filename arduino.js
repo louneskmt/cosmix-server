@@ -44,6 +44,16 @@ port.on('open', function() {
             */
         }); 
 
+
+        // TO CORRECT
+        // Config signal
+        port.write(binstring(0b1111, {in:'binary'}), function(err) {
+            if (err) {
+              return console.log('Error on write config signal: ', err.message);
+            }
+            console.log('Config signal written: \n');
+        });
+
         startConfig(600, 500, 400, 4180712152735, 600, 600);
     }, 5000);
 
