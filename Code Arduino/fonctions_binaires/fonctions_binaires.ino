@@ -79,6 +79,11 @@ bool configure(){
   Serial.print("THERMOMETRE: ");
   Serial.println(config_THERMOMETRE);
 
+  /*config_CLOCK = concatenateBinary(configArray[bufferCursor++],configArray[bufferCursor++]);
+  Serial.print("THERMOMETRE: ");
+  Serial.println(config_THERMOMETRE); */
+  //bufferCursor += 6;
+
   config_START = concatenateBinary(configArray[bufferCursor++],configArray[bufferCursor++]);
   Serial.print("START: ");
   Serial.println(config_START);
