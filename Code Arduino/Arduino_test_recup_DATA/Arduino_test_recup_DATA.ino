@@ -48,7 +48,7 @@ void loop() {
   }
   */
   while (Serial.available())  {
-    mem = Serial.parseInt(); 
+    mem = Serial.read(); 
     Serial.println(mem, BIN);
 
     if(mem==15){ // 15 = 0b00001111
