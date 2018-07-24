@@ -70,12 +70,13 @@ function startConfig(GPS, bar, therm, clock, start, end) {
 
     var bufferArray = stringMessage.match(/.{1,8}/g);
     bufferArray = bufferArray.map(function(str){
-        console.log(str);
         return parseInt(str, 2);
     });
-    console.log(bufferArray);
+    var buffer = Buffer.from(bufferArray);
 
-    port.write(binaryNumber, function(err) {
+    console.log(buffer);
+
+    port.write(buffer, function(err) {
         if (err) {
           return console.log('Error on write config message: ', err.message);
         }
