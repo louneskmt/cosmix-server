@@ -49,7 +49,7 @@ void loop() {
   */
   while (Serial.available())  {
     mem = Serial.read(); 
-    Serial.print(mem, BIN);
+    Serial.println(mem, BIN);
   }
   Serial.println();
 }

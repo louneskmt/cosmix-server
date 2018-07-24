@@ -68,7 +68,9 @@ function startConfig(GPS, bar, therm, clock, start, end) {
     //var message = toBinary(GPS, 'GPS') + toBinary(bar, 'bar') + toBinary(therm, 'therm') + toBinary(clock, 'clock') + toBinary(start, 'start') + toBinary(end, 'end');
     var message = toBinary(end, 'end') + toBinary(start, 'start') + /*toBinary(clock, 'clock') + */ toBinary(therm, 'therm') + toBinary(bar, 'bar') + toBinary(GPS, 'GPS')+"00001111";
 
-    port.write(binstring(message, {in:'binary'}), function(err) {
+    var binaryNumber = parseInt(message, 2);
+
+    port.write(binaryNumber, function(err) {
         if (err) {
           return console.log('Error on write config message: ', err.message);
         }
