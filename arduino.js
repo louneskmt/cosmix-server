@@ -54,7 +54,7 @@ port.on('open', function() {
             console.log('Config signal written: \n');
         });
 
-        startConfig(600, 500, 400, 4180712152735, 600, 600);
+        //startConfig(600, 500, 400, 4180712152735, 600, 600);
     }, 5000);
 
 });
