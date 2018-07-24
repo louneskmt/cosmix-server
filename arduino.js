@@ -47,7 +47,7 @@ port.on('open', function() {
 
         // TO CORRECT
         // Config signal
-        port.write(binstring(0b1111, {in:'binary'}), function(err) {
+        port.write(binstring(15, {in:'binary'}), function(err) {
             if (err) {
               return console.log('Error on write config signal: ', err.message);
             }
