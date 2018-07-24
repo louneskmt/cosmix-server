@@ -48,8 +48,12 @@ void loop() {
   }
   */
   while (Serial.available())  {
-    mem = Serial.read(); 
+    mem = Serial.parseInt(); 
     Serial.println(mem, BIN);
+
+    if(mem==15){ // 15 = 0b00001111
+      Serial.println("Configuring");
+    }
   }
   Serial.println();
 }
