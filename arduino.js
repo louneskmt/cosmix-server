@@ -70,6 +70,7 @@ function startConfig(GPS, bar, therm, clock, start, end) {
 
     var bufferArray = stringMessage.match(/.{1,8}/g);
     bufferArray = bufferArray.map(function(str){
+        console.log(str);
         return parseInt(str, 2);
     });
     console.log(bufferArray);
