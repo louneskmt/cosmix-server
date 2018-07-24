@@ -47,14 +47,14 @@ port.on('open', function() {
 
         // TO CORRECT
         // Config signal
-        port.write(15, function(err) {
+        /*port.write(15, function(err) {
             if (err) {
               return console.log('Error on write config signal: ', err.message);
             }
             console.log('Config signal written: \n');
-        });
+        });*/
 
-        //startConfig(600, 500, 400, 4180712152735, 600, 600);
+        startConfig(600, 500, 400, 4180712152735, 600, 600);
     }, 5000);
 
 });
@@ -66,7 +66,7 @@ port.on('error', function(err) {
 
 function startConfig(GPS, bar, therm, clock, start, end) {
     //var message = toBinary(GPS, 'GPS') + toBinary(bar, 'bar') + toBinary(therm, 'therm') + toBinary(clock, 'clock') + toBinary(start, 'start') + toBinary(end, 'end');
-    var message = toBinary(end, 'end') + toBinary(start, 'start') + /*toBinary(clock, 'clock') + */ toBinary(therm, 'therm') + toBinary(bar, 'bar') + toBinary(GPS, 'GPS');
+    var message = toBinary(end, 'end') + toBinary(start, 'start') + /*toBinary(clock, 'clock') + */ toBinary(therm, 'therm') + toBinary(bar, 'bar') + toBinary(GPS, 'GPS')+"00001111";
 
     port.write(binstring(message, {in:'binary'}), function(err) {
         if (err) {
