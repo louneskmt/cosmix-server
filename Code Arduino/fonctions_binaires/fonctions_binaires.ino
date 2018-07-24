@@ -14,6 +14,7 @@ int configArray[16] = {};
 
 void setup(){
   Serial.begin(9600);
+  Serial.println("Ready");
 
   //if(getNthByte(configBinary, 0)==15){
   /*if(true){
@@ -36,10 +37,15 @@ void setup(){
 }
 
 void loop(){
+  
+  
 
  if(Serial.available()){
+   
+   
   
   int data = Serial.parseInt(); // A remplacer par Serial.read();
+  Serial.println(data);
 
   if(configuring){
     recordConfig(data);
