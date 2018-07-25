@@ -68,13 +68,13 @@ function startConfig(GPS, bar, therm, clock, start, end) {
 
     // 0b00001111 ==> Config binary signal
     var stringMessage = "00001111"+toBinary(GPS, 'GPS') + toBinary(bar, 'bar') + toBinary(therm, 'therm') + /*toBinary(clock, 'clock') +*/ toBinary(start, 'start') + toBinary(end, 'end');
-    //var stringMessage = toBinary(end, 'end') + toBinary(start, 'start') + /*toBinary(clock, 'clock') + */ toBinary(therm, 'therm') + toBinary(bar, 'bar') + toBinary(GPS, 'GPS')+"00001111";
 
-    var bufferArray = stringMessage.match(/.{1,8}/g);
-    bufferArray = bufferArray.map(function(str){
-        return parseInt(str, 2);
+    var bufferArray = stringMessage.match(/.{1,8}/g); // Retourne un Array de String tous les 8 caractères (expression reguliere)
+
+    bufferArray = bufferArray.map(function(str){ // Pour chaque élément de l'array...
+        return parseInt(str, 2); // parseInt(str, base) ==> Transforme un string en int selon la base donnée (par défaut : base 10)
     });
-    var buffer = Buffer.from(bufferArray);
+    var buffer = Buffer.from(bufferArray); // Créé un Buffer à partir de l'array (nécessaire pour port.write)
 
     port.write(buffer, function(err) {
         if (err) {
