@@ -113,7 +113,6 @@ io.sockets.on('connection', function (socket) {
 console.log("Lancé ! Récupération des données en cours...");
 
 // Module de création et d'écriture dans un fichier et gestion de la date
-var fs = require("fs");
 var now = new Date();
 var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + ":" + now.getMinutes() + ".csmx";
 console.log("Experiment file created at : " + file_name);
