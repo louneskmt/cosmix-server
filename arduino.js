@@ -12,7 +12,7 @@ console.log("Lancé ! Récupération des données en cours...");
 var fs = require("fs");
 var now = new Date();
 var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + ":" + now.getMinutes() + ".csmx";
-console.log("Fichier de mesure enregistré sous : " + file_name);
+console.log("Experiment file created at : " + file_name);
 try{
     fs.writeFileSync(file_name, "Mesure\n", 'UTF-8'); 
 }catch(error){
@@ -67,7 +67,7 @@ port.on('error', function(err) {
 function startConfig(GPS, bar, therm, clock, start, end) {
 
     // 0b00001111 ==> Config binary signal
-    var stringMessage = "00001111"+toBinary(GPS, 'GPS') + toBinary(bar, 'bar') + toBinary(therm, 'therm') + /*toBinary(clock, 'clock') +*/ toBinary(start, 'start') + toBinary(end, 'end');
+    var stringMessage = "00001111"+ toBinary(GPS, 'GPS') + toBinary(bar, 'bar') + toBinary(therm, 'therm') + /*toBinary(clock, 'clock') +*/ toBinary(start, 'start') + toBinary(end, 'end');
 
     var bufferArray = stringMessage.match(/.{1,8}/g); // Retourne un Array de String tous les 8 caractères (expression reguliere)
 
