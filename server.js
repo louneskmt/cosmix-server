@@ -66,9 +66,25 @@ console.log('Serveur créé !');
 io.sockets.on('connection', function (socket) {
     console.log('Un client est connecté !');
 
-    socket.on('configMessage', function(message) {
-        console.log('Message reçu : ' + message);
+    socket.on('startConfig', function(message) {
+        console.log('Configuration lancée :');
+        socket.on('config_GPS', function(message) {
+            console.log('GPS : ' + message);
+        });
+        socket.on('config_BAROMETRE', function(message) {
+            console.log('BAROMETRE : ' + message);
+        });
+        socket.on('config_THERMOMETRE', function(message) {
+            console.log('THERMOMETRE : ' + message);
+        });
+        socket.on('config_START', function(message) {
+            console.log('START : ' + message);
+        });
+        socket.on('config_END', function(message) {
+            console.log('END : ' + message);
+        });
     });
+
 });
 
 
