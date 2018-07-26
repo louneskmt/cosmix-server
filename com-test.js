@@ -172,6 +172,7 @@ function startConfig(GPS, bar, therm, clock, start, end) {
         if (err) {
           return console.log('Error on write config message: ', err.message);
         }
+        console.log('');
         console.log('Config message written from Buffer: ' + bufferArray + '\n');
     });
 }
