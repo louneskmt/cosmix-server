@@ -67,4 +67,7 @@ io.sockets.on('connection', function (socket) {
     console.log('Un client est connecté !');
 });
 
+io.sockets.on('configMessage', function(message) {
+    console.log('Message reçu : ' + message);
+});
 
