@@ -76,11 +76,11 @@ io.sockets.on('connection', function (socket) {
     socket.on('startConfig', function() {
         console.log('Configuration lancée :');
         socket.on('config_GPS', function(configObject) {
-            var config_GPS = configObject.GPS;
-            var config_BAROMETRE = configObject.BAROMETRE;
-            var config_THERMOMETRE = configObject.THERMOMETRE;
-            var config_START = configObject.START;
-            var config_END = configObject.END;
+            config_GPS = configObject.GPS;
+            config_BAROMETRE = configObject.BAROMETRE;
+            config_THERMOMETRE = configObject.THERMOMETRE;
+            config_START = configObject.START;
+            config_END = configObject.END;
 
             console.log('GPS : ' + config_GPS);
             console.log('BAROMETRE : ' + config_BAROMETRE);
