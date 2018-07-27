@@ -73,6 +73,12 @@ console.log('Serveur créé !');
 io.sockets.on('connection', function (socket) {
     console.log('Un client est connecté !');
 
+    var config_GPS = 0;
+    var config_BAROMETRE = 0;
+    var config_THERMOMETRE = 0;
+    var config_START = 0;
+    var config_END = 0;
+
     socket.on('startConfig', function() {
         console.log('Configuration lancée :');
         socket.on('config_GPS', function(configObject) {
