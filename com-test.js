@@ -81,9 +81,9 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('startConfig', function() {
         console.log('Configuration lancée :');
-        socket.on('config_GPS', function(message) {
+        socket.on('configObject', function(message) {
             var configObject = JSON.parse(message);
-            
+
             config_GPS = configObject.GPS;
             config_BAROMETRE = configObject.BAROMETRE;
             config_THERMOMETRE = configObject.THERMOMETRE;
