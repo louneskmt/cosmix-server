@@ -70,36 +70,27 @@ var io = require('socket.io').listen(server);
 console.log('Serveur créé !');
 
 // Quand un client se connecte, on le note dans la console
+var config = {
+    GPS: 0,
+    BAROMETRE: 0,
+    THERMOMETRE: 0,
+    START: 0,
+    END: 0
+}
+
 io.sockets.on('connection', function (socket) {
     console.log('Un client est connecté !');
 
-    var config_GPS = 0;
-    var config_BAROMETRE = 0;
-    var config_THERMOMETRE = 0;
-    var config_START = 0;
-    var config_END = 0;
-
-    socket.on('startConfig', function() {
-        console.log('Configuration lancée :');
-        socket.on('configObject', function(message) {
+    socket.on('configObject', function(message) {
             var configObject = JSON.parse(message);
 
-            config_GPS = configObject.GPS;
-            config_BAROMETRE = configObject.BAROMETRE;
-            config_THERMOMETRE = configObject.THERMOMETRE;
-            config_START = configObject.START;
-            config_END = configObject.END;
+            config = configObject
 
-            console.log('GPS : ' + config_GPS);
-            console.log('BAROMETRE : ' + config_BAROMETRE);
-            console.log('THERMOMETRE : ' + config_THERMOMETRE);
-            console.log('START : ' + config_START);
-            console.log('END : ' + config_END);
-        });
-
-        socket.on('stopConfig', function() {
-            startConfig(config_GPS, config_BAROMETRE, config_THERMOMETRE, 0, config_START, config_END);
-        });
+            console.log('GPS : ' + config.GPS);
+            console.log('BAROMETRE : ' + config.BAROMETRE);
+            console.log('THERMOMETRE : ' + config.THERMOMETRE);
+            console.log('START : ' + config.START);
+            console.log('END : ' + config.END);
     });
 
 });
