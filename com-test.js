@@ -110,7 +110,7 @@ io.sockets.on('connection', function (socket) {
             status: 'ON'
         }
         socket.emit('newData', JSON.stringify(data));
-    }, 2000);
+    }, 1000);
 
 });
 
