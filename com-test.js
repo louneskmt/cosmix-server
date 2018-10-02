@@ -112,6 +112,10 @@ io.sockets.on('connection', function (socket) {
         socket.emit('newData', JSON.stringify(data));
     }, 1000);
 
+    socket.on('ping', function() {
+        socket.emit('pong');
+    });
+
 });
 
 
