@@ -1,10 +1,10 @@
 #!/bin/bash
 cd ./cosmix-server/
 echo "Récupération des dernières modifications..."
-echo \n
+echo $'\n'
 git pull
 killall node
-echo \n
+echo $'\n'
 echo "Démarrage..."
-echo \n
+echo $'\n'
 node com-test.js
