@@ -1,5 +1,6 @@
 #!/bin/bash
-echo "Lancement du serveur..."
 cd ./cosmix-server/
+echo "Récupération des dernières modifications..."
 git pull
+echo "Démarrage..."
 node com-test.js
