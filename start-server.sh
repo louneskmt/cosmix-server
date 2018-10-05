@@ -2,6 +2,6 @@
 cd ./cosmix-server/
 echo "Récupération des dernières modifications..."
 git pull
-killall "node com-test.js"
+killall node
 echo "Démarrage...\n"
 node com-test.js
