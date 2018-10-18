@@ -46,7 +46,15 @@ void loop() {
     message = Serial.read()-'0';  // on soustrait le caractère 0, qui vaut 48 en ASCII
     Serial.println(message);
   }
+<<<<<<< HEAD
   
+=======
+<<<<<<< HEAD
+  
+=======
+
+>>>>>>> 096145cdd0a1f9563ed348607c5f39ecd6e5b58e
+>>>>>>> 65e5bb68e283e6bdf054f2c3b21aad32dba69963
   delay(2000);
 }
 
