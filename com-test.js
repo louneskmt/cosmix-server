@@ -1,10 +1,12 @@
 /*
-Fichier "com-test.js"
-Fusion de 'arduino.js' et 'server.js' afin de tester la commnication entre logiciel, serveur et arduino
-
-Dernière modification par Lounès le 26/07
+    Fichier "com-test.js"
+    Fusion de 'arduino.js' et 'server.js' afin de tester la commnication entre logiciel, serveur et arduino
 */
 
+/*
+    HTTP SERVER SETUP
+    -- START --
+*/
 const ansi = require("ansi-colors");
 const http = require('http');
 const url = require("url");
@@ -56,7 +58,6 @@ server = http.createServer(function (req, res) {
         console.error(ansi.red.strikethrough(error));
         console.log("");
     }
-    
 });
 
 // Démarrage du Serveur
@@ -64,15 +65,70 @@ var port = 8080, adresse = "0.0.0.0"; // L'adresse 0.0.0.0 écoute toutes les IP
 server.listen(port, adresse, function(){
     console.log(ansi.green("The server is serving. Waiter is waiting for a request."));
 });
+/*
+    HTTP SERVER SETUP
+    -- END --
+*/
 
+/*
+    EXPERIMENT FILE SETUP 
+    -- START --
+*/
+// Module de création et d'écriture dans un fichier et gestion de la date
+var now = new Date();
+var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + ":" + now.getMinutes() + ".csmx";
+console.log("Experiment file created at : " + file_name);
+try{
+    fs.writeFileSync(file_name, "Mesure\n", 'UTF-8'); 
+}catch(error){
+    console.log("Err 404 : "+file_name);
+}
+/*
+    EXPERIMENT FILE SETUP
+    -- END --
+*/
+
+var binstring = require('binstring');
+
+/*
+    SERIAL PORT SETUP
+    -- START --
+*/
+// Initialisation du module de récupération des données sur le port Serial
+var SerialPort = require('serialport');
+const Readline = require('@serialport/parser-readline');
+var port = new SerialPort('/dev/ttyACM0', {
+    baudRate: 9600
+});
+const parser = port.pipe(new Readline({ delimiter: '\r\n' })); // Code afin d'obtenir les messages en clair et non le buffer
+/*
+    SERIAL PORT SETUP
+    -- END --
+*/
+
+/*
+    SOCKETS SETUP
+    -- START --
+*/
 // Création des sockets
 var io = require('socket.io').listen(server);
 console.log('Serveur créé !');
+/*
+    SOCKETS SETUP
+    -- END --
+*/
 
+/*
+    MAIN PROGRAM (if connected)
+    -- START --
+*/
 // Quand un client se connecte, on le note dans la console
 io.sockets.on('connection', function (socket) {
+    // Message de lancement
+console.log("Lancé ! Récupération des données en cours...");
     console.log('Un client est connecté !');
 
+    /*
     var config_GPS = 0;
     var config_BAROMETRE = 0;
     var config_THERMOMETRE = 0;
@@ -111,58 +167,57 @@ io.sockets.on('connection', function (socket) {
         }
         socket.emit('newData', JSON.stringify(data));
     }, 1000);
+    */
 
     socket.on('ping', function() {
         socket.emit('pong');
     });
 
-});
+    // Event : open port
+    port.on('open', function () {
+        console.log('Serial Port Opened'); // Information console de l'ouverture du port
+    
+        setTimeout(function () {
+            // Récupération des données disponibles et écriture à la fin du fichier de mesure
+            parser.on('data', function (data) {
+                var separator = /\s*(?:,|$)\s*/;
+                var dataArray = data.split(separator);
+                var dataObject = {
+                    year: dataArray[0].slice(5),
+                    month: dataArray[1],
+                    day: dataArray[2],
+                    hour: dataArray[3],
+                    minutes: dataArray[4],
+                    secondes: dataArray[5],
+                    GPSx: dataArray[9],
+                    GPSy: dataArray[10],
+                    temperature: dataArray[12],
+                    barometer: dataArray[13],
+                    eventsC1: dataArray[15],
+                    eventsC2: dataArray[16],
+                    coincidences: dataArray[17],
+                }
+                
+                console.log("New data : ");
+                console.log("   EventsC1 " + dataObject.eventsC1);
+                console.log("   EventsC1 " + dataObject.eventsC2);
+                console.log("   Coincidences " + dataObject.coincidences);
+                console.log("---------------------------------");
 
-
-// Message de lancement
-console.log("Lancé ! Récupération des données en cours...");
-
-// Module de création et d'écriture dans un fichier et gestion de la date
-var now = new Date();
-var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + ":" + now.getMinutes() + ".csmx";
-console.log("Experiment file created at : " + file_name);
-try{
-    fs.writeFileSync(file_name, "Mesure\n", 'UTF-8'); 
-}catch(error){
-    console.log("Err 404 : "+file_name);
-}
-
-var binstring = require('binstring');
-
-// Initialisation du module de récupération des données sur le port Serial
-var SerialPort = require('serialport');
-const Readline = require('@serialport/parser-readline');
-var port = new SerialPort('/dev/ttyACM0', {
-    baudRate: 9600
-});
-const parser = port.pipe(new Readline({ delimiter: '\r\n' })); // Code afin d'obtenir les messages en clair et non le buffer
-
-// Evenement : port ouvert
-port.on('open', function() {
-    console.log('Serial Port Opened'); // Information console de l'ouverture du port
-
-    setTimeout(function() {
-        // Récupération des données disponibles et écriture à la fin du fichier de mesure
-        parser.on('data', function(data) {
-            console.log(data);
-
-            fs.appendFileSync(file_name, data); // Ajout de la ligne de mesure récupérée à la fin du fichier
-            fs.appendFileSync(file_name, '\n'); // Retour à la ligne
-            
-        }); 
-
-    }, 5000);
-
-});
-
-// Gestion des erreurs
-port.on('error', function(err) {
-    console.log('Error: ', err.message);
+                dataJSON = JSON.stringify(dataObject);
+    
+                fs.appendFileSync(file_name, dataJSON); // Ajout de la ligne de mesure récupérée à la fin du fichier
+                fs.appendFileSync(file_name, '\n'); // Retour à la ligne
+    
+                socket.emit('newData', dataJSON);            
+            });
+        }, 2000);
+    });
+    
+    // Gestion des erreurs
+    port.on('error', function(err) {
+        console.log('Error: ', err.message);
+    });
 });
 
 /*
