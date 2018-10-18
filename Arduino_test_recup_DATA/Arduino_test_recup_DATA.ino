@@ -30,7 +30,7 @@ void loop()
     count2 = rand() % 4;
     coinc += rand() % 3 + 1;
 
-    sprintf(datamess, "DATA 2018, 05, 26, %d, %d, %d, 99, (*), 6000, -999.0, -999.0,  -999.0, 33.2, 101000, 0, %d, %d, %d", heure, minute, sec, count1, count2, coinc);
+    sprintf(datamess, "DATA 2018, 05, 26, %d, %d, %d, 99, (*), 6000, -999.0, -999.0, -999.0, 33.2, 101000, 0, %d, %d, %d", heure, minute, sec, count1, count2, coinc);
     Serial.println(datamess);
 
     sec += 2;

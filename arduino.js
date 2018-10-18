@@ -13,10 +13,10 @@ var fs = require("fs");
 var now = new Date();
 var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + ":" + now.getMinutes() + ".csmx";
 console.log("Experiment file created at : " + file_name);
-try{
-    fs.writeFileSync(file_name, "Mesure\n", 'UTF-8'); 
-}catch(error){
-    console.log("Err 404 : "+file_name);
+try {
+    fs.writeFileSync(file_name, "Mesure\n", 'UTF-8');
+} catch (error) {
+    console.log("Err 404 : " + file_name);
 }
 
 var binstring = require('binstring');
@@ -30,39 +30,54 @@ var port = new SerialPort('/dev/ttyACM0', {
 const parser = port.pipe(new Readline({ delimiter: '\r\n' })); // Code afin d'obtenir les messages en clair et non le buffer
 
 // Evenement : port ouvert
-port.on('open', function() {
+port.on('open', function () {
     console.log('Serial Port Opened'); // Information console de l'ouverture du port
 
-    parser.on('data', function(data) {
-        if(data == "Ready") {
-            setTimeout(function() {
-                // Récupération des données disponibles et écriture à la fin du fichier de mesure
-               parser.on('data', function(data) {
-                    console.log(data);
-        
-                    fs.appendFileSync(file_name, data); // Ajout de la ligne de mesure récupérée à la fin du fichier
-                    fs.appendFileSync(file_name, '\n'); // Retour à la ligne
-        
-        
-                });  
-        
-        
-                // TO CORRECT
-                // Config signal
-                /*port.write(15, function(err) {
-                    if (err) {
-                      return console.log('Error on write config signal: ', err.message);
-                    }
-                    console.log('Config signal written: \n');
-                });*/
-        
-            }, 2000);
-        }
-    });
+    setTimeout(function () {
+        // Récupération des données disponibles et écriture à la fin du fichier de mesure
+        parser.on('data', function (data) {
+            var separator = /\s*(;|$)\s*/;
+            var dataArray = data.split(separator);
+            var dataObject = {
+                year: dataArray[0].slice(5),
+                month: dataArray[1],
+                day: dataArray[2],
+                hour: dataArray[3],
+                minutes: dataArray[4],
+                secondes: dataArray[5],
+                GPSx: dataArray[9],
+                GPSy: dataArray[10],
+                temperature: dataArray[12],
+                barometer: dataArray[13],
+                eventsC1: dataArray[15],
+                eventsC2: dataArray[16],
+                coincidences: dataArray[17],
+            }
+
+            console.log(data);
+            console.log(JSON.stringify(dataObject));
+
+            fs.appendFileSync(file_name, data); // Ajout de la ligne de mesure récupérée à la fin du fichier
+            fs.appendFileSync(file_name, '\n'); // Retour à la ligne
+
+
+        });
+
+
+        // TO CORRECT
+        // Config signal
+        /*port.write(15, function(err) {
+            if (err) {
+              return console.log('Error on write config signal: ', err.message);
+            }
+            console.log('Config signal written: \n');
+        });*/
+
+    }, 2000);
 });
 
 // Gestion des erreurs
-port.on('error', function(err) {
+port.on('error', function (err) {
     console.log('Error: ', err.message);
 });
 
