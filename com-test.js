@@ -103,7 +103,7 @@ var port = new SerialPort('/dev/ttyACM0', {
 const parser = port.pipe(new Readline({ delimiter: '\r\n' })); // Code afin d'obtenir les messages en clair et non le buffer
 /*******************************/
 /*      SERIAL PORT SETUP      */
-/*           END             */
+/*            END              */
 /*******************************/
 
 /*******************************/
