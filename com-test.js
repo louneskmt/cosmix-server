@@ -151,10 +151,9 @@ port.on('open', function() {
         parser.on('data', function(data) {
             console.log(data);
 
-            /* Décommenter après avoir fini les tests
             fs.appendFileSync(file_name, data); // Ajout de la ligne de mesure récupérée à la fin du fichier
             fs.appendFileSync(file_name, '\n'); // Retour à la ligne
-            */
+            
         }); 
 
     }, 5000);
@@ -166,6 +165,7 @@ port.on('error', function(err) {
     console.log('Error: ', err.message);
 });
 
+/*
 function startConfig(GPS, bar, therm, clock, start, end) {
 
     // 0b00001111 ==> Config binary signal
@@ -211,5 +211,5 @@ function toBinary(data, type) {
 
     return data;
 }
-
+*/
 
