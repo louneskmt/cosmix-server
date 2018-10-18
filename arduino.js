@@ -55,6 +55,7 @@ port.on('open', function () {
             }
 
             console.log(data);
+            console.log(dataArray);
             console.log(JSON.stringify(dataObject));
 
             fs.appendFileSync(file_name, data); // Ajout de la ligne de mesure récupérée à la fin du fichier
