@@ -38,10 +38,8 @@ port.on('open', function() {
         parser.on('data', function(data) {
             console.log(data);
 
-            /* Décommenter après avoir fini les tests
             fs.appendFileSync(file_name, data); // Ajout de la ligne de mesure récupérée à la fin du fichier
             fs.appendFileSync(file_name, '\n'); // Retour à la ligne
-            */
         }); 
 
 
@@ -54,7 +52,6 @@ port.on('open', function() {
             console.log('Config signal written: \n');
         });*/
 
-        startConfig(600, 500, 400, 4180712152735, 600, 600);
     }, 5000);
 
 });
@@ -64,10 +61,11 @@ port.on('error', function(err) {
     console.log('Error: ', err.message);
 });
 
+/*
 function startConfig(GPS, bar, therm, clock, start, end) {
 
     // 0b00001111 ==> Config binary signal
-    var stringMessage = "00001111"+ toBinary(GPS, 'GPS') + toBinary(bar, 'bar') + toBinary(therm, 'therm') + /*toBinary(clock, 'clock') +*/ toBinary(start, 'start') + toBinary(end, 'end');
+    var stringMessage = "00001111"+ toBinary(GPS, 'GPS') + toBinary(bar, 'bar') + toBinary(therm, 'therm') + /*toBinary(clock, 'clock') + toBinary(start, 'start') + toBinary(end, 'end');
 
     var bufferArray = stringMessage.match(/.{1,8}/g); // Retourne un Array de String tous les 8 caractères (expression reguliere)
 
@@ -107,4 +105,4 @@ function toBinary(data, type) {
     }
 
     return data;
-}
+} */
