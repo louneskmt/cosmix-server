@@ -125,8 +125,6 @@ console.log('Serveur créé !');
 /*******************************/
 // Quand un client se connecte, on le note dans la console
 io.sockets.on('connection', function (socket) {
-    // Message de lancement
-console.log("Lancé ! Récupération des données en cours...");
     console.log('Un client est connecté !');
 
     /*
@@ -176,6 +174,8 @@ console.log("Lancé ! Récupération des données en cours...");
 
     // Event : open port
     port.on('open', function () {
+        // Message de lancement
+        console.log("Lancé ! Récupération des données en cours...");
         console.log('Serial Port Opened'); // Information console de l'ouverture du port
     
         setTimeout(function () {
