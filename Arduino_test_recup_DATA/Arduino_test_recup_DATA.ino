@@ -11,7 +11,7 @@ int temps = 0;
 int intervalle = 0;
 int message = 0;
 
-void setup() 
+void setup()
 {
   Serial.begin(9600);
 
@@ -20,41 +20,29 @@ void setup()
   Serial.println("Ready");
 }
 
-void loop() {
+void loop()
+{
   intervalle = millis() - temps;
-  
-  if(intervalle >= 5000) {
+
+  if (intervalle >= 2000)
+  {
     count1 = rand() % 4;
     count2 = rand() % 4;
     coinc += rand() % 3 + 1;
-      
+
     sprintf(datamess, "DATA 2018, 05, 26, %d, %d, %d, 99, (*), 6000, -999.0, -999.0,  -999.0, 33.2, 101000, 0, %d, %d, %d", heure, minute, sec, count1, count2, coinc);
     Serial.println(datamess);
-  
+
     sec += 2;
-    if(sec == 60) {
+    if (sec == 60)
+    {
       sec = 0;
       minute++;
     }
-    if(minute == 60) {
+    if (minute == 60)
+    {
       minute = 0;
       heure++;
-    }    
+    }
   }
-
-  while (Serial.available())  {
-    message = Serial.read()-'0';  // on soustrait le caractère 0, qui vaut 48 en ASCII
-    Serial.println(message);
-  }
-<<<<<<< HEAD
-  
-=======
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> 096145cdd0a1f9563ed348607c5f39ecd6e5b58e
->>>>>>> 65e5bb68e283e6bdf054f2c3b21aad32dba69963
-  delay(2000);
 }
-

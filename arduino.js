@@ -33,29 +33,32 @@ const parser = port.pipe(new Readline({ delimiter: '\r\n' })); // Code afin d'ob
 port.on('open', function() {
     console.log('Serial Port Opened'); // Information console de l'ouverture du port
 
-    setTimeout(function() {
-        // Récupération des données disponibles et écriture à la fin du fichier de mesure
-        parser.on('data', function(data) {
-            console.log(data);
-
-            fs.appendFileSync(file_name, data); // Ajout de la ligne de mesure récupérée à la fin du fichier
-            fs.appendFileSync(file_name, '\n'); // Retour à la ligne
-
-
-        }); 
-
-
-        // TO CORRECT
-        // Config signal
-        /*port.write(15, function(err) {
-            if (err) {
-              return console.log('Error on write config signal: ', err.message);
-            }
-            console.log('Config signal written: \n');
-        });*/
-
-    }, 2000);
-
+    parser.on('data', function(data) {
+        if(data == "Ready") {
+            setTimeout(function() {
+                // Récupération des données disponibles et écriture à la fin du fichier de mesure
+               parser.on('data', function(data) {
+                    console.log(data);
+        
+                    fs.appendFileSync(file_name, data); // Ajout de la ligne de mesure récupérée à la fin du fichier
+                    fs.appendFileSync(file_name, '\n'); // Retour à la ligne
+        
+        
+                });  
+        
+        
+                // TO CORRECT
+                // Config signal
+                /*port.write(15, function(err) {
+                    if (err) {
+                      return console.log('Error on write config signal: ', err.message);
+                    }
+                    console.log('Config signal written: \n');
+                });*/
+        
+            }, 2000);
+        }
+    });
 });
 
 // Gestion des erreurs
