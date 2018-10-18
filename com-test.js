@@ -3,10 +3,10 @@
     Fusion de 'arduino.js' et 'server.js' afin de tester la commnication entre logiciel, serveur et arduino
 */
 
-/*
-    HTTP SERVER SETUP
-    -- START --
-*/
+/*******************************/
+/*      HTTP SERVER SETUP      */
+/*           BEGIN             */
+/*******************************/
 const ansi = require("ansi-colors");
 const http = require('http');
 const url = require("url");
@@ -65,15 +65,15 @@ var port = 8080, adresse = "0.0.0.0"; // L'adresse 0.0.0.0 écoute toutes les IP
 server.listen(port, adresse, function(){
     console.log(ansi.green("The server is serving. Waiter is waiting for a request."));
 });
-/*
-    HTTP SERVER SETUP
-    -- END --
-*/
+/*******************************/
+/*      HTTP SERVER SETUP      */
+/*            END              */
+/*******************************/
 
-/*
-    EXPERIMENT FILE SETUP 
-    -- START --
-*/
+/*******************************/
+/*    EXPERIMENT FILE SETUP    */
+/*           BEGIN             */
+/*******************************/
 // Module de création et d'écriture dans un fichier et gestion de la date
 var now = new Date();
 var file_name = "./experiments_files/Experiment-" + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + ":" + now.getMinutes() + ".csmx";
@@ -83,17 +83,17 @@ try{
 }catch(error){
     console.log("Err 404 : "+file_name);
 }
-/*
-    EXPERIMENT FILE SETUP
-    -- END --
-*/
+/*******************************/
+/*    EXPERIMENT FILE SETUP    */
+/*            END              */
+/*******************************/
 
 var binstring = require('binstring');
 
-/*
-    SERIAL PORT SETUP
-    -- START --
-*/
+/*******************************/
+/*      SERIAL PORT SETUP      */
+/*           BEGIN             */
+/*******************************/
 // Initialisation du module de récupération des données sur le port Serial
 var SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
@@ -101,27 +101,28 @@ var port = new SerialPort('/dev/ttyACM0', {
     baudRate: 9600
 });
 const parser = port.pipe(new Readline({ delimiter: '\r\n' })); // Code afin d'obtenir les messages en clair et non le buffer
-/*
-    SERIAL PORT SETUP
-    -- END --
-*/
+/*******************************/
+/*      SERIAL PORT SETUP      */
+/*           END             */
+/*******************************/
 
-/*
-    SOCKETS SETUP
-    -- START --
-*/
+/*******************************/
+/*        SOCKETS SETUP        */
+/*           BEGIN             */
+/*******************************/
 // Création des sockets
 var io = require('socket.io').listen(server);
 console.log('Serveur créé !');
-/*
-    SOCKETS SETUP
-    -- END --
-*/
+/*******************************/
+/*        SOCKETS SETUP        */
+/*            END              */
+/*******************************/
 
-/*
-    MAIN PROGRAM (if connected)
-    -- START --
-*/
+/*******************************/
+/*        MAIN PROGRAM         */
+/*       (if connected)        */
+/*           BEGIN             */
+/*******************************/
 // Quand un client se connecte, on le note dans la console
 io.sockets.on('connection', function (socket) {
     // Message de lancement
@@ -219,7 +220,16 @@ console.log("Lancé ! Récupération des données en cours...");
         console.log('Error: ', err.message);
     });
 });
+/*******************************/
+/*        MAIN PROGRAM         */
+/*       (if connected)        */
+/*            END              */
+/*******************************/
 
+/*******************************/
+/*    FUNCTIONS DECLARATION    */
+/*           BEGIN             */
+/*******************************/
 /*
 function startConfig(GPS, bar, therm, clock, start, end) {
 
