@@ -36,7 +36,7 @@ port.on('open', function () {
     setTimeout(function () {
         // Récupération des données disponibles et écriture à la fin du fichier de mesure
         parser.on('data', function (data) {
-            var separator = /\s*(?:,|$)\s*/;
+            var separator = /, +/;
             var dataArray = data.split(separator);
             var dataObject = {
                 year: dataArray[0].slice(5),
