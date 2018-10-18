@@ -169,7 +169,7 @@ port.on('error', function(err) {
 function startConfig(GPS, bar, therm, clock, start, end) {
 
     // 0b00001111 ==> Config binary signal
-    var stringMessage = "00001111" + toBinary(GPS, 'GPS') + toBinary(bar, 'bar') + toBinary(therm, 'therm') + /*toBinary(clock, 'clock') +*/ toBinary(start, 'start') + toBinary(end, 'end');
+    var stringMessage = "00001111" + toBinary(GPS, 'GPS') + toBinary(bar, 'bar') + toBinary(therm, 'therm') + toBinary(clock, 'clock') + toBinary(start, 'start') + toBinary(end, 'end');
 
     var bufferArray = stringMessage.match(/.{1,8}/g); // Retourne un Array de String tous les 8 caractères (expression reguliere)
 
