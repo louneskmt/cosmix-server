@@ -16,6 +16,8 @@ void setup()
   Serial.begin(9600);
 
   temps = millis();
+
+  Serial.println("Ready");
 }
 
 void loop() {
@@ -29,7 +31,7 @@ void loop() {
     sprintf(datamess, "DATA 2018, 05, 26, %d, %d, %d, 99, (*), 6000, -999.0, -999.0,  -999.0, 33.2, 101000, 0, %d, %d, %d", heure, minute, sec, count1, count2, coinc);
     Serial.println(datamess);
   
-    sec += 5;
+    sec += 2;
     if(sec == 60) {
       sec = 0;
       minute++;
@@ -44,7 +46,11 @@ void loop() {
     message = Serial.read()-'0';  // on soustrait le caractère 0, qui vaut 48 en ASCII
     Serial.println(message);
   }
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 096145cdd0a1f9563ed348607c5f39ecd6e5b58e
   delay(2000);
 }
 
