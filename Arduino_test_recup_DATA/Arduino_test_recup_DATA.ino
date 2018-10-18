@@ -44,5 +44,7 @@ void loop()
       minute = 0;
       heure++;
     }
+
+    temps = millis();
   }
 }
