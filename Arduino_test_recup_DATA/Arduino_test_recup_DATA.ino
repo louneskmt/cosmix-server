@@ -16,6 +16,8 @@ void setup()
   Serial.begin(9600);
 
   temps = millis();
+
+  Serial.println("Ready");
 }
 
 void loop() {
