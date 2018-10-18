@@ -31,7 +31,7 @@ void loop() {
     sprintf(datamess, "DATA 2018, 05, 26, %d, %d, %d, 99, (*), 6000, -999.0, -999.0,  -999.0, 33.2, 101000, 0, %d, %d, %d", heure, minute, sec, count1, count2, coinc);
     Serial.println(datamess);
   
-    sec += 5;
+    sec += 2;
     if(sec == 60) {
       sec = 0;
       minute++;

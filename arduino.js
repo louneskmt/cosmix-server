@@ -41,7 +41,7 @@ port.on('open', function() {
             fs.appendFileSync(file_name, data); // Ajout de la ligne de mesure récupérée à la fin du fichier
             fs.appendFileSync(file_name, '\n'); // Retour à la ligne
 
-            
+
         }); 
 
 
@@ -54,7 +54,7 @@ port.on('open', function() {
             console.log('Config signal written: \n');
         });*/
 
-    }, 5000);
+    }, 2000);
 
 });
 
