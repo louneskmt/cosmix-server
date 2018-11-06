@@ -124,8 +124,14 @@ console.log('Serveur créé !');
 /*           BEGIN             */
 /*******************************/
 // Quand un client se connecte, on le note dans la console
+
+var connected = false;
+var socketGlobal = null;
+
 io.sockets.on('connection', function (socket) {
     console.log('Un client est connecté !');
+    connected = true;
+    socketGlobal = socket;
 
     /*
     var config_GPS = 0;
@@ -213,7 +219,9 @@ port.on('open', function () {
             fs.appendFileSync(file_name, dataJSON); // Ajout de la ligne de mesure récupérée à la fin du fichier
             fs.appendFileSync(file_name, '\n'); // Retour à la ligne
 
-            socket.emit('newData', dataJSON);            
+            if(connected) {
+                socketGlobal.emit('newData', dataJSON);   
+            }         
         });
     }, 2000);
 });
@@ -222,6 +230,7 @@ port.on('open', function () {
 port.on('error', function(err) {
     console.log('Error: ', err.message);
 });
+
 /*******************************/
 /*        MAIN PROGRAM         */
 /*       (if connected)        */
