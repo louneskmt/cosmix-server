@@ -172,53 +172,55 @@ io.sockets.on('connection', function (socket) {
         socket.emit('pong');
     });
 
-    // Event : open port
-    port.on('open', function () {
-        // Message de lancement
-        console.log("Lancé ! Récupération des données en cours...");
-        console.log('Serial Port Opened'); // Information console de l'ouverture du port
     
-        setTimeout(function () {
-            // Récupération des données disponibles et écriture à la fin du fichier de mesure
-            parser.on('data', function (data) {
-                var separator = /\s*(?:,|$)\s*/;
-                var dataArray = data.split(separator);
-                var dataObject = {
-                    year: dataArray[0].slice(5),
-                    month: dataArray[1],
-                    day: dataArray[2],
-                    hour: dataArray[3],
-                    minutes: dataArray[4],
-                    secondes: dataArray[5],
-                    GPSx: dataArray[9],
-                    GPSy: dataArray[10],
-                    temperature: dataArray[12],
-                    barometer: dataArray[13],
-                    eventsC1: dataArray[15],
-                    eventsC2: dataArray[16],
-                    coincidences: dataArray[17],
-                }
-                
-                console.log("New data : ");
-                console.log("   EventsC1 " + dataObject.eventsC1);
-                console.log("   EventsC1 " + dataObject.eventsC2);
-                console.log("   Coincidences " + dataObject.coincidences);
-                console.log("---------------------------------");
+});
 
-                dataJSON = JSON.stringify(dataObject);
-    
-                fs.appendFileSync(file_name, dataJSON); // Ajout de la ligne de mesure récupérée à la fin du fichier
-                fs.appendFileSync(file_name, '\n'); // Retour à la ligne
-    
-                socket.emit('newData', dataJSON);            
-            });
-        }, 2000);
-    });
-    
-    // Gestion des erreurs
-    port.on('error', function(err) {
-        console.log('Error: ', err.message);
-    });
+// Event : open port
+port.on('open', function () {
+    // Message de lancement
+    console.log("Lancé ! Récupération des données en cours...");
+    console.log('Serial Port Opened'); // Information console de l'ouverture du port
+
+    setTimeout(function () {
+        // Récupération des données disponibles et écriture à la fin du fichier de mesure
+        parser.on('data', function (data) {
+            var separator = /\s*(?:,|$)\s*/;
+            var dataArray = data.split(separator);
+            var dataObject = {
+                year: dataArray[0].slice(5),
+                month: dataArray[1],
+                day: dataArray[2],
+                hour: dataArray[3],
+                minutes: dataArray[4],
+                secondes: dataArray[5],
+                GPSx: dataArray[9],
+                GPSy: dataArray[10],
+                temperature: dataArray[12],
+                barometer: dataArray[13],
+                eventsC1: dataArray[15],
+                eventsC2: dataArray[16],
+                coincidences: dataArray[17],
+            }
+            
+            console.log("New data : ");
+            console.log("   EventsC1 " + dataObject.eventsC1);
+            console.log("   EventsC1 " + dataObject.eventsC2);
+            console.log("   Coincidences " + dataObject.coincidences);
+            console.log("---------------------------------");
+
+            dataJSON = JSON.stringify(dataObject);
+
+            fs.appendFileSync(file_name, dataJSON); // Ajout de la ligne de mesure récupérée à la fin du fichier
+            fs.appendFileSync(file_name, '\n'); // Retour à la ligne
+
+            socket.emit('newData', dataJSON);            
+        });
+    }, 2000);
+});
+
+// Gestion des erreurs
+port.on('error', function(err) {
+    console.log('Error: ', err.message);
 });
 /*******************************/
 /*        MAIN PROGRAM         */
